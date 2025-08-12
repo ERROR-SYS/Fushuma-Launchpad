@@ -68,13 +68,14 @@ function mapEvmIcoToIIcoInfo(index: number, params: any, state: any): IIcoInfoWi
 }
 
 export async function fetchAllICOs(): Promise<IIcoInfoWithKey[]> {
+  const proxy = new ethers.Contract(proxyAddress, LaunchpadABI, new ethers.JsonRpcProvider("https://rpc.fushuma.com"));
     try {
-      if(proxyAsLaunchpad == null) return [];
-      const total = await proxyAsLaunchpad.counter();
+      if(proxy == null) return [];
+      const total = await proxy.counter();
       const results: IIcoInfoWithKey[] = [];
   
       for (let i = 18; i < Number(total); i++) {
-        const ico = await proxyAsLaunchpad.getICO(i);
+        const ico = await proxy.getICO(i);
         const { 0: params, 1: state } = ico;
         results.push(mapEvmIcoToIIcoInfo(i, params, state));
       }
@@ -87,9 +88,10 @@ export async function fetchAllICOs(): Promise<IIcoInfoWithKey[]> {
 }
 
 export async function fetchICO(index: string): Promise<IIcoInfoWithKey | null> {
+  const proxy = new ethers.Contract(proxyAddress, LaunchpadABI, new ethers.JsonRpcProvider("https://rpc.fushuma.com"));
   try {
-    if(proxyAsLaunchpad == null) return null;
-    const ico = await proxyAsLaunchpad.getICO(index);
+    if(proxy == null) return null;
+    const ico = await proxy.getICO(index);
     const { 0: params, 1: state } = ico;
     return mapEvmIcoToIIcoInfo(Number(index), params, state);
   } catch (err) {

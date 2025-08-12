@@ -16,6 +16,9 @@
     const evmWeb3 = new Web3(window.ethereum);
     const balanceStore = useBalanceStore();
 
+    const provider = getMetaMaskEthereum() ? new ethers.BrowserProvider(getMetaMaskEthereum()) : null;
+    const network = provider ? await provider.getNetwork() : {chainId: 0n};
+
     const fetchBalances = () => {
         balanceStore.clearBalances();
         balanceStore.fetchBalances();
@@ -192,8 +195,8 @@
             if(evmMemo) {
                 const id = icoPot.split("-")[1];
                 // 1. Connect to MetaMask
-                const provider = new ethers.BrowserProvider(getMetaMaskEthereum());
                 await provider.send("eth_requestAccounts", []); // prompts MetaMask connect
+
 
                 // 2. Get signer
                 const signer = await provider.getSigner();
@@ -357,7 +360,7 @@
 </script>
 
 <template>
-    <div class="bg-white shadow-sm py-6 px-4 space-y-3">
+    <div class="bg-white shadow-sm py-6 px-4 space-y-3" v-if="Number(network.chainId) === 121224 && evmMemo">
         <h1 class="font-semibold expletus text-xl tracking-tight mb-1">
             {{ customTitles() }}
         </h1>
@@ -628,6 +631,9 @@
                 </p>
             </div>
         </div>
+    </div>
+    <div class="bg-white shadow-sm py-6 px-4 space-y-3" v-else>
+        <p>Please Switch to Fushuma.</p>
     </div>
 </template>
 
