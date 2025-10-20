@@ -1,5 +1,5 @@
 import { ethers, JsonRpcProvider } from "ethers";
-import ERC20_ABI from "@/abis/erc20.json";
+import ERC20_ABI from "@/abis/ERC20.json";
 
 export const TokenAddress = new Map<string, string>([
     ['So11111111111111111111111111111111111111112', 'wSOL'],
