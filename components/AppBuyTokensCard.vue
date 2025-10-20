@@ -11,7 +11,7 @@
     import { getEvmCostInfo, proxyAddress, getMetaMaskEthereum } from '~/js/ico-evm';
     import { ethers } from 'ethers';
     import LaunchpadABI from '@/abis/Launchpad.json';
-    import ERC20ABI from '@/abis/ERC20.json';
+    import ERC20ABI from '@/abis/erc20.json';
 
     const evmWeb3 = new Web3(window.ethereum);
     const balanceStore = useBalanceStore();

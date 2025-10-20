@@ -6,7 +6,7 @@
     import { getTokenSymbol } from '~/js/tokens';
     import { ethers } from 'ethers';
     import { getMetaMaskEthereum } from '~/js/ico-evm';
-    import ERC20ABI from '~/abis/ERC20.json';
+    import ERC20ABI from '~/abis/erc20.json';
 
 
     const { icoInfo, status, currentPrice } = defineProps<{

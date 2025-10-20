@@ -125,7 +125,7 @@
   import Web3 from 'web3';
   import { ref, onMounted } from 'vue';
   import LaunchpadABI from '@/abis/Launchpad.json';
-  import ERC20ABI from '@/abis/ERC20.json';
+  import ERC20ABI from '@/abis/erc20.json';
   import { getTokenDecimals } from '~/js/tokens';
   import { proxyAddress, getMetaMaskEthereum } from '~/js/ico-evm';
   import { ethers } from 'ethers';
